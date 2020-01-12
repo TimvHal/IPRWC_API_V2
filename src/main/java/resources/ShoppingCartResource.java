@@ -40,10 +40,10 @@ public class ShoppingCartResource implements JacksonService {
     }
 
     @Override
-    public String writeValueAsString(Object[] carList) {
+    public String writeValueAsString(Object[] itemList) {
         String jsonString = null;
         try {
-            jsonString = mapper.writeValueAsString(carList);
+            jsonString = mapper.writeValueAsString(itemList);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
@@ -51,22 +51,14 @@ public class ShoppingCartResource implements JacksonService {
     }
 
     @Override
-    public Car readValue(String jsonString) {
-        Car car = null;
+    public CartItem readValue(String jsonString) {
+        CartItem item = null;
         try {
-            car = mapper.readValue(jsonString, Car.class);
+            item = mapper.readValue(jsonString, CartItem.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return car;
-    }
-
-    public ArrayList<Car> convertList(ArrayList<Object> list) {
-        ArrayList<Car> carList = new ArrayList<>();
-        for (Object object : list) {
-            carList.add((Car) object);
-        }
-        return carList;
+        return item;
     }
 
 }

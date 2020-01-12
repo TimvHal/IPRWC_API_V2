@@ -35,7 +35,7 @@ public class CarDAO {
                 String status = rs.getString("status");
 
                 Car current = new Car(brand, model, description, price, engine, power, modelYear, status);
-                current.setArticleId(UUID.fromString(rs.getString("article_id")));
+                current.setArticleId(rs.getString("article_id"));
                 current.setIsSold(rs.getBoolean("is_sold"));
                 current.setDateAdded(rs.getDate("date_added").toString());
                 carList.add(current);
@@ -56,15 +56,15 @@ public class CarDAO {
         try {
             PreparedStatement ps = DatabaseService.prepareQuery("INSERT INTO cars VALUES(?,?,?,?,?,?,?,?,?,?,?);");
             ps.setObject(1, UUID.randomUUID());
-            ps.setString(2, car.brand);
-            ps.setString(3, car.model);
-            ps.setString(4, car.description);
-            ps.setDouble(5, car.price);
-            ps.setString(6, car.engine);
-            ps.setInt(7, car.power);
-            ps.setInt(8, car.modelYear);
-            ps.setString(9, car.status.toString().toLowerCase());
-            ps.setBoolean(10, car.isSold);
+            ps.setString(2, car.getBrand());
+            ps.setString(3, car.getModel());
+            ps.setString(4, car.getDescription());
+            ps.setDouble(5, car.getPrice());
+            ps.setString(6, car.getEngine());
+            ps.setInt(7, car.getPower());
+            ps.setInt(8, car.getModelYear());
+            ps.setString(9, car.getStatus().toString().toLowerCase());
+            ps.setBoolean(10, car.getIsSold());
             ps.setObject(11, timestamp);
 
             DatabaseService.executeUpdate(ps);
@@ -77,16 +77,16 @@ public class CarDAO {
         try {
             PreparedStatement ps = DatabaseService.prepareQuery("UPDATE cars SET brand = ?, model = ?, description = ?," +
                     " price = ?, engine = ?, power = ?, model_year = ?, status = ?, is_sold = ? WHERE article_id = ?;");
-            ps.setString(1, car.brand);
-            ps.setString(2, car.model);
-            ps.setString(3, car.description);
-            ps.setDouble(4, car.price);
-            ps.setString(5, car.engine);
-            ps.setInt(6, car.power);
-            ps.setInt(7, car.modelYear);
-            ps.setString(8, car.status.toString().toLowerCase());
-            ps.setBoolean(9, car.isSold);
-            ps.setObject(10, car.articleId);
+            ps.setString(1, car.getBrand());
+            ps.setString(2, car.getModel());
+            ps.setString(3, car.getDescription());
+            ps.setDouble(4, car.getPrice());
+            ps.setString(5, car.getEngine());
+            ps.setInt(6, car.getPower());
+            ps.setInt(7, car.getModelYear());
+            ps.setString(8, car.getStatus().toString().toLowerCase());
+            ps.setBoolean(9, car.getIsSold());
+            ps.setObject(10, car.getArticleId());
 
             DatabaseService.executeUpdate(ps);
         } catch (SQLException e) {

@@ -14,17 +14,17 @@ import java.util.UUID;
  */
 public class Car extends Object {
 
-    public UUID articleId;
-    public String brand;
-    public String model;
-    public String description;
-    public double price;
-    public String engine;
-    public int power;
-    public int modelYear;
-    public Status status;
-    public boolean isSold;
-    public String dateAdded;
+    private String articleId;
+    private  String brand;
+    private String model;
+    private String description;
+    private double price;
+    private String engine;
+    private int power;
+    private int modelYear;
+    private Status status;
+    private boolean isSold;
+    private String dateAdded;
 
     @JsonCreator()
     public Car(@JsonProperty("brand") String brand, @JsonProperty("model") String model,
@@ -42,7 +42,7 @@ public class Car extends Object {
         this.isSold = false;
     }
 
-    public void setArticleId(UUID articleId) {
+    public void setArticleId(String articleId) {
         this.articleId = articleId;
     }
 
@@ -52,5 +52,45 @@ public class Car extends Object {
 
     public void setDateAdded(String dateAdded) {
         this.dateAdded = dateAdded;
+    }
+
+    public String getArticleId() {
+        return this.articleId;
+    }
+
+    public String getBrand() {
+        return this.brand;
+    }
+
+    public String getModel() {
+        return this.model;
+    }
+
+    public Double getPrice() {
+        return this.price;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public String getEngine() {
+        return this.engine;
+    }
+
+    public int getPower() {
+        return this.power;
+    }
+
+    public int getModelYear() {
+        return this.modelYear;
+    }
+
+    public Status getStatus() {
+        return this.status;
+    }
+
+    public boolean getIsSold() {
+        return this.isSold;
     }
 }

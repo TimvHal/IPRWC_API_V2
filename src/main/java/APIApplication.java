@@ -17,6 +17,7 @@ import org.jose4j.jwt.consumer.JwtConsumerBuilder;
 import org.jose4j.jwt.consumer.JwtContext;
 import org.jose4j.keys.HmacKey;
 import resources.CarResource;
+import resources.ShoppingCartResource;
 import resources.UserResource;
 import services.AuthenticationService;
 import services.JsonWebTokenService;
@@ -55,11 +56,8 @@ public class APIApplication extends Application<APIConfiguration> {
         // We gebruiken een bulkRegister() zodat we niet knikker vaak environment.jersey().register() hoeven te callen.
         bulkRegister(environment,
                 new CarResource(),
-                new UserResource()
-               /* new CompanyResource(),
-                new JourneyResource(),
-                new ProjectResource(),
-                new UserResource()*/
+                new UserResource(),
+                new ShoppingCartResource()
         );
 
         // Authenticator

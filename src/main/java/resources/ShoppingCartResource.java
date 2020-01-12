@@ -4,51 +4,39 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.dropwizard.auth.Auth;
 import models.Car;
+import models.CartItem;
 import models.User;
 import services.CarService;
 import services.JacksonService;
+import services.ShoppingCartService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.UUID;
 
-/**
- * Resource class for retrieving and posting cars.
- *
- * @author TimvHal
- * @version 03/01/2019
- */
-@Path("/car")
-public class CarResource implements JacksonService {
+@Path("/shoppingcart")
+public class ShoppingCartResource implements JacksonService {
 
     private static ObjectMapper mapper = new ObjectMapper();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getCars(@Auth User user) {
-        return writeValueAsString(CarService.getCars());
+    public String getCartItems(@Auth User user) {
+        return writeValueAsString(ShoppingCartService.getCartItems(user));
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void postCar(@Auth User user, String jsonString) {
-        CarService.postCar(readValue(jsonString));
-    }
-
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{article_id}")
-    public void updateCar(@Auth User user, String jsonString, @PathParam("article_id") String articleId) {
-        Car car = readValue(jsonString);
-        car.setArticleId(articleId);
-        CarService.updateCar(car);
+    public boolean postCartItem(@Auth User user, @PathParam("article_id") String articleId) {
+        return ShoppingCartService.postCartItem(user, articleId);
     }
 
     @DELETE
-    @Path("/{article_id}")
-    public void deleteCar(@Auth User user, @PathParam("article_id") String articleId) {
-        CarService.deleteCar(articleId);
+    @Path("/{cart_item_id}")
+    public boolean deleteCartItem(@Auth User user, @PathParam("cart_item_id") String cartItemId) {
+        return ShoppingCartService.deleteCartItem(cartItemId);
     }
 
     @Override
@@ -80,4 +68,5 @@ public class CarResource implements JacksonService {
         }
         return carList;
     }
+
 }

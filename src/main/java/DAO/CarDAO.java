@@ -33,8 +33,43 @@ public class CarDAO {
                 int power = rs.getInt("power");
                 int modelYear = rs.getInt("model_year");
                 String status = rs.getString("status");
+                String imageUrl = rs.getString("image_url");
 
-                Car current = new Car(brand, model, description, price, engine, power, modelYear, status);
+                Car current = new Car(brand, model, description, price, engine, power, modelYear, status, imageUrl);
+                current.setArticleId(rs.getString("article_id"));
+                current.setIsSold(rs.getBoolean("is_sold"));
+                current.setDateAdded(rs.getDate("date_added").toString());
+                carList.add(current);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Car[] carArray = new Car[carList.size()];
+        for(int i = 0; i < carList.size(); i++) {
+            carArray[i] = carList.get(i);
+        }
+        return carArray;
+    }
+
+    public static Car[] getCar(String articleId) {
+        ArrayList<Car> carList = new ArrayList<>();
+        try {
+            PreparedStatement ps = DatabaseService.prepareQuery("SELECT * FROM cars WHERE article_id = ?;");
+            ps.setObject(1, UUID.fromString(articleId));
+            ResultSet rs = DatabaseService.executeQuery(ps);
+
+            while(rs.next()) {
+                String brand = rs.getString("brand");
+                String model = rs.getString("model");
+                String description = rs.getString("description");
+                double price = rs.getDouble("price");
+                String engine = rs.getString("engine");
+                int power = rs.getInt("power");
+                int modelYear = rs.getInt("model_year");
+                String status = rs.getString("status");
+                String imageUrl = rs.getString("image_url");
+
+                Car current = new Car(brand, model, description, price, engine, power, modelYear, status, imageUrl);
                 current.setArticleId(rs.getString("article_id"));
                 current.setIsSold(rs.getBoolean("is_sold"));
                 current.setDateAdded(rs.getDate("date_added").toString());
@@ -54,7 +89,7 @@ public class CarDAO {
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
         try {
-            PreparedStatement ps = DatabaseService.prepareQuery("INSERT INTO cars VALUES(?,?,?,?,?,?,?,?,?,?,?);");
+            PreparedStatement ps = DatabaseService.prepareQuery("INSERT INTO cars VALUES(?,?,?,?,?,?,?,?,?,?,?,?);");
             ps.setObject(1, UUID.randomUUID());
             ps.setString(2, car.getBrand());
             ps.setString(3, car.getModel());
@@ -66,6 +101,7 @@ public class CarDAO {
             ps.setString(9, car.getStatus().toString().toLowerCase());
             ps.setBoolean(10, car.getIsSold());
             ps.setObject(11, timestamp);
+            ps.setString(12, car.getImageUrl());
 
             DatabaseService.executeUpdate(ps);
         } catch (SQLException e) {
@@ -76,7 +112,7 @@ public class CarDAO {
     public static void updateCar(Car car) {
         try {
             PreparedStatement ps = DatabaseService.prepareQuery("UPDATE cars SET brand = ?, model = ?, description = ?," +
-                    " price = ?, engine = ?, power = ?, model_year = ?, status = ?, is_sold = ? WHERE article_id = ?;");
+                    " price = ?, engine = ?, power = ?, model_year = ?, status = ?, is_sold = ?, image_url = ? WHERE article_id = ?;");
             ps.setString(1, car.getBrand());
             ps.setString(2, car.getModel());
             ps.setString(3, car.getDescription());
@@ -86,7 +122,8 @@ public class CarDAO {
             ps.setInt(7, car.getModelYear());
             ps.setString(8, car.getStatus().toString().toLowerCase());
             ps.setBoolean(9, car.getIsSold());
-            ps.setObject(10, car.getArticleId());
+            ps.setString(10, car.getImageUrl());
+            ps.setObject(11, car.getArticleId());
 
             DatabaseService.executeUpdate(ps);
         } catch (SQLException e) {

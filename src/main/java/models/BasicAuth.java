@@ -17,7 +17,7 @@ public class BasicAuth implements Principal {
 
     @Override
     public String getName() {
-        return user.getName();
+        return user.getEmail();
     }
 
 }

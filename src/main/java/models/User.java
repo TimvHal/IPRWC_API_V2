@@ -15,25 +15,25 @@ public class User implements Principal {
 
     private String userId;
     private String email;
-    private String username;
+    private String name;
     private boolean isAdmin;
     private String password;
     private String salt;
 
     public User(RegistryForm registryData) {
         this.email = registryData.email;
-        this.username = registryData.username;
+        this.name = registryData.name;
         this.isAdmin = false;
         this.password = registryData.password;
     }
 
     @JsonCreator
     public User(@JsonProperty("userId") String userId, @JsonProperty("email") String email,
-                @JsonProperty("username") String username, @JsonProperty("isAdmin") boolean isAdmin,
+                @JsonProperty("name") String name, @JsonProperty("isAdmin") boolean isAdmin,
                 @JsonProperty("password") String password, @JsonProperty("salt") String salt) {
         this.userId = userId;
         this.email = email;
-        this.username = username;
+        this.name = name;
         this.isAdmin = isAdmin;
         this.password = password;
         this.salt = salt;
@@ -44,11 +44,11 @@ public class User implements Principal {
     }
 
     public String getName() {
-        return username;
+        return email;
     }
 
     public String getEmail() {
-        return email;
+        return name;
     }
 
     public String getPassword() {

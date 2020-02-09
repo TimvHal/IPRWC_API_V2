@@ -25,12 +25,14 @@ public class Car extends Object {
     private Status status;
     private boolean isSold;
     private String dateAdded;
+    private String imageUrl;
 
     @JsonCreator()
     public Car(@JsonProperty("brand") String brand, @JsonProperty("model") String model,
                @JsonProperty("description") String description, @JsonProperty("price") double price,
                @JsonProperty("engine") String engine, @JsonProperty("power") int power,
-               @JsonProperty("model_year") int modelYear, @JsonProperty("status") String status) {
+               @JsonProperty("model_year") int modelYear, @JsonProperty("status") String status,
+               @JsonProperty("date_added") String dateAdded, @JsonProperty("image_url") String imageUrl) {
         this.brand = brand;
         this.model = model;
         this.description = description;
@@ -40,6 +42,24 @@ public class Car extends Object {
         this.modelYear = modelYear;
         this.status = Status.valueOf(status.toUpperCase());
         this.isSold = false;
+        this.dateAdded = dateAdded;
+        this.imageUrl = imageUrl;
+
+    }
+
+    public Car(String brand, String model, String description, double price, String engine, int power, int modelYear,
+               String status, String imageUrl) {
+        this.brand = brand;
+        this.model = model;
+        this.description = description;
+        this.price = price;
+        this.engine = engine;
+        this.power = power;
+        this.modelYear = modelYear;
+        this.status = Status.valueOf(status.toUpperCase());
+        this.isSold = false;
+        this.imageUrl = imageUrl;
+
     }
 
     public void setArticleId(String articleId) {
@@ -92,5 +112,11 @@ public class Car extends Object {
 
     public boolean getIsSold() {
         return this.isSold;
+    }
+
+    public String getDateAdded() { return this.dateAdded; }
+
+    public String getImageUrl() {
+        return this.imageUrl;
     }
 }

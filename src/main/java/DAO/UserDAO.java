@@ -49,7 +49,7 @@ public class UserDAO {
         try {
             PreparedStatement ps = DatabaseService.prepareQuery(
                     "SELECT user_id, email, username, hashed_password, salt, is_admin FROM users " +
-                            "WHERE username = ?;");
+                            "WHERE email = ?;");
 
             ps.setString(1, credentials.getUsername());
             return getUser(ps);

@@ -18,7 +18,7 @@ public class UserService {
 
     public static boolean registerUser(RegistryForm registryForm) {
 
-        if(registryForm.username.length() < 5 || registryForm.password.length() < 8 ||
+        if(registryForm.name.length() < 5 || registryForm.password.length() < 8 ||
             !registryForm.email.contains("@")) {
             return false;
         }

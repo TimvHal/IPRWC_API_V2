@@ -26,8 +26,15 @@ public class CarResource implements JacksonService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getCars(@Auth User user) {
+    public String getCars() {
         return writeValueAsString(CarService.getCars());
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{article_id}")
+    public String getCar(@PathParam("article_id") String articleId) {
+        return writeValueAsString(CarService.getCar(articleId));
     }
 
     @POST

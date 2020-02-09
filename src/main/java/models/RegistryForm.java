@@ -12,14 +12,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class RegistryForm {
 
     public String email;
-    public String username;
+    public String name;
     public String password;
 
     @JsonCreator
-    public RegistryForm(@JsonProperty("email") String email, @JsonProperty("username") String username,
+    public RegistryForm(@JsonProperty("email") String email, @JsonProperty("name") String name,
                         @JsonProperty("password") String password) {
         this.email = email;
-        this.username = username;
+        this.name = name;
         this.password = password;
     }
 }

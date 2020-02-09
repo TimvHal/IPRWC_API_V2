@@ -15,6 +15,10 @@ public class CarService {
         return CarDAO.getCars();
     }
 
+    public static Car[] getCar(String articleId) {
+       return CarDAO.getCar(articleId);
+    }
+
     public static void postCar(Car car) {
         CarDAO.postCar(car);
     }

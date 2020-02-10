@@ -16,4 +16,8 @@ public class ShoppingCartService {
     public static boolean deleteCartItem(String cartItemId) {
         return ShoppingCartDAO.deleteCartItem(cartItemId);
     }
+
+    public static boolean emptyCart(String email) {
+        return ShoppingCartDAO.emptyCart(email);
+    }
 }

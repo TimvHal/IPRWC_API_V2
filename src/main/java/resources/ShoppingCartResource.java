@@ -39,6 +39,12 @@ public class ShoppingCartResource implements JacksonService {
         return ShoppingCartService.deleteCartItem(cartItemId);
     }
 
+    @DELETE
+    @Path("/all")
+    public boolean emptyCart(@Auth User user) {
+        return ShoppingCartService.emptyCart(user.getEmail());
+    }
+
     @Override
     public String writeValueAsString(Object[] itemList) {
         String jsonString = null;

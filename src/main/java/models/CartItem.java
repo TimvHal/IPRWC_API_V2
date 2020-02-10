@@ -9,15 +9,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @version 06-01-2020
  */
 public class CartItem {
-    private String itemId;
+    private String cartItemId;
     private String articleId;
     private String email;
     private String name;
     private Double price;
 
-    public CartItem(@JsonProperty("article_id") String articleId,
+    public CartItem(@JsonProperty("cart_item_id") String cartItemId, @JsonProperty("article_id") String articleId,
                     @JsonProperty("email") String email, @JsonProperty("name") String name,
                     @JsonProperty("price") Double price) {
+        this.cartItemId = cartItemId;
         this.articleId = articleId;
         this.email = email;
         this.name = name;
@@ -25,7 +26,7 @@ public class CartItem {
     }
 
     public void setItemId(String itemId) {
-        this.itemId = itemId;
+        this.cartItemId = itemId;
     }
 
     public String getArticleId() {
@@ -42,5 +43,9 @@ public class CartItem {
 
     public Double getPrice() {
         return price;
+    }
+
+    public String getCartItemId() {
+        return this.cartItemId;
     }
 }

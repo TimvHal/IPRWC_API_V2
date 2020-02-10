@@ -12,14 +12,6 @@ public class DatabaseService {
     private static String url = "jdbc:sqlite:C:/Users/Tim van Hal/Documents/HBO Leiden/Jaar 2/IPRWC/Database/iprwc_webshop.db";
 
     private static Connection con;
-    {
-        try {
-            con = DriverManager.getConnection(url);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
 
     public static PreparedStatement prepareQuery(String query) {
         PreparedStatement ps = null;

@@ -34,8 +34,7 @@ public class ShoppingCartDAO {
                     price = rs1.getDouble("price");
                 }
 
-                CartItem current = new CartItem(articleId, userEmail, name, price);
-                current.setItemId(itemId);
+                CartItem current = new CartItem(itemId, articleId, userEmail, name, price);
                 cartItemList.add(current);
             }
 
@@ -74,6 +73,18 @@ public class ShoppingCartDAO {
         try {
             PreparedStatement ps = DatabaseService.prepareQuery("DELETE FROM cart_items WHERE cart_item_id = ?");
             ps.setString(1, cartItemId);
+            DatabaseService.executeUpdate(ps);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean emptyCart(String email) {
+        try {
+            PreparedStatement ps = DatabaseService.prepareQuery("DELETE FROM cart_items WHERE user_email = ?");
+            ps.setString(1, email);
             DatabaseService.executeUpdate(ps);
             return true;
         } catch (SQLException e) {

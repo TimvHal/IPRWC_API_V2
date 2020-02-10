@@ -44,11 +44,11 @@ public class User implements Principal {
     }
 
     public String getName() {
-        return email;
+        return name;
     }
 
     public String getEmail() {
-        return name;
+        return email;
     }
 
     public String getPassword() {

@@ -17,6 +17,7 @@ import org.jose4j.jwt.consumer.JwtConsumerBuilder;
 import org.jose4j.jwt.consumer.JwtContext;
 import org.jose4j.keys.HmacKey;
 import resources.CarResource;
+import resources.OrderResource;
 import resources.ShoppingCartResource;
 import resources.UserResource;
 import services.AuthenticationService;
@@ -57,7 +58,8 @@ public class APIApplication extends Application<APIConfiguration> {
         bulkRegister(environment,
                 new CarResource(),
                 new UserResource(),
-                new ShoppingCartResource()
+                new ShoppingCartResource(),
+                new OrderResource()
         );
 
         // Authenticator

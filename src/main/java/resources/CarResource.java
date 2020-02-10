@@ -39,23 +39,32 @@ public class CarResource implements JacksonService {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void postCar(@Auth User user, String jsonString) {
-        CarService.postCar(readValue(jsonString));
+    public String postCar(@Auth User user, String jsonString) {
+        if(!user.getIsAdmin()) {
+            return "Not allowed: this user is not an admin.";
+        }
+        return CarService.postCar(readValue(jsonString));
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{article_id}")
-    public void updateCar(@Auth User user, String jsonString, @PathParam("article_id") String articleId) {
+    public String updateCar(@Auth User user, String jsonString, @PathParam("article_id") String articleId) {
+        if(!user.getIsAdmin()) {
+            return "Not allowed: this user is not an admin.";
+        }
         Car car = readValue(jsonString);
         car.setArticleId(articleId);
-        CarService.updateCar(car);
+        return CarService.updateCar(car);
     }
 
     @DELETE
     @Path("/{article_id}")
-    public void deleteCar(@Auth User user, @PathParam("article_id") String articleId) {
-        CarService.deleteCar(articleId);
+    public String deleteCar(@Auth User user, @PathParam("article_id") String articleId) {
+        if(!user.getIsAdmin()) {
+            return "Not allowed: this user is not an admin.";
+        }
+        return CarService.deleteCar(articleId);
     }
 
     @Override

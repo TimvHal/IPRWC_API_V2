@@ -85,7 +85,7 @@ public class CarDAO {
         return carArray;
     }
 
-    public static void postCar(Car car) {
+    public static String postCar(Car car) {
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
         try {
@@ -106,10 +106,12 @@ public class CarDAO {
             DatabaseService.executeUpdate(ps);
         } catch (SQLException e) {
             e.printStackTrace();
+            return "fail";
         }
+        return "success";
     }
 
-    public static void updateCar(Car car) {
+    public static String updateCar(Car car) {
         try {
             PreparedStatement ps = DatabaseService.prepareQuery("UPDATE cars SET brand = ?, model = ?, description = ?," +
                     " price = ?, engine = ?, power = ?, model_year = ?, status = ?, is_sold = ?, image_url = ? WHERE article_id = ?;");
@@ -128,16 +130,20 @@ public class CarDAO {
             DatabaseService.executeUpdate(ps);
         } catch (SQLException e) {
             e.printStackTrace();
+            return "fail";
         }
+        return "success";
     }
 
-    public static void deleteCar(String articleId) {
+    public static String deleteCar(String articleId) {
         try {
             PreparedStatement ps = DatabaseService.prepareQuery("DELETE FROM cars WHERE article_id = ?;");
             ps.setObject(1, articleId);
             DatabaseService.executeUpdate(ps);
         } catch (SQLException e) {
             e.printStackTrace();
+            return "fail";
         }
+        return "success";
     }
 }

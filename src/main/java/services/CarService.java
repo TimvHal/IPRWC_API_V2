@@ -19,15 +19,15 @@ public class CarService {
        return CarDAO.getCar(articleId);
     }
 
-    public static void postCar(Car car) {
-        CarDAO.postCar(car);
+    public static String postCar(Car car) {
+        return CarDAO.postCar(car);
     }
 
-    public static void updateCar(Car car) {
-        CarDAO.updateCar(car);
+    public static String updateCar(Car car) {
+        return CarDAO.updateCar(car);
     }
 
-    public static void deleteCar(String articleId) {
-        CarDAO.deleteCar(articleId);
+    public static String deleteCar(String articleId) {
+        return CarDAO.deleteCar(articleId);
     }
 }

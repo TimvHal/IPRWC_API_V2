@@ -10,7 +10,7 @@ import java.util.UUID;
  * Model containing data for a car.
  *
  * @author TimvHal
- * @Version 03/01/2020
+ * @version 03/01/2020
  */
 public class Car extends Object {
 

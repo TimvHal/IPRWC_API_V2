@@ -9,7 +9,7 @@ import java.sql.*;
  * @version 07-01-2020
  */
 public class DatabaseService {
-    private static String url = "jdbc:sqlite:C:/Users/Tim van Hal/Documents/HBO Leiden/Jaar 2/IPRWC/Database/iprwc_webshop.db";
+    private static String url = "jdbc:sqlite:iprwc_webshop.db";
 
     private static Connection con;
 

@@ -102,7 +102,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.ipsen2.api.IPSEN2_APIApplication</mainClass>
+                            <mainClass>APIApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
